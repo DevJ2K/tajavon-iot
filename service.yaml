@@ -1,0 +1,22 @@
+# Stable network entry point for the application.
+#
+# Pods are disposable and change IP every time they are recreated.
+# Which is exactly what happens during the v1 -> v2 rollout.
+# A Service gives them one fixed address.
+apiVersion: v1
+kind: Service
+metadata:
+  name: playground
+spec:
+  # NodePort opens the same port on every node. The k3d cluster maps host
+  # port 8888 onto it, which is what makes `curl http://localhost:8888/` work.
+  type: NodePort
+  selector:
+    app: playground
+  ports:
+      # Port the Service answers on, inside the cluster.
+    - port: 8888
+      # Port the container listens on.
+      targetPort: 8888
+      # Port opened on the nodes. Must stay in sync with p3/confs/cluster.yaml.
+      nodePort: 30888

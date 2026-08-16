@@ -1,0 +1,24 @@
+# Desired state of the application.
+#
+# Argo CD reads this file out of Git and makes the cluster match it. Changing
+# the image tag below and pushing is the entire deployment procedure.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playground
+spec:
+  selector:
+    # Which pods this Deployment owns. Must match the pod labels below.
+    matchLabels:
+      app: playground
+  template:
+    metadata:
+      labels:
+        app: playground
+    spec:
+      containers:
+        - name: playground
+          # The only line that changes between versions.
+          image: wil42/playground:v1
+          ports:
+            - containerPort: 8888
