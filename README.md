@@ -15,7 +15,7 @@ separate repository, under `p3/`:
 
 | File | Role |
 |------|------|
-| `deployment.yaml` | The application: `wil42/playground` image and container port `8888` |
+| `deployment.yaml` | The application: `devj2k/tajavon42-playground` image and container port `8888` |
 | `service.yaml` | NodePort `30888`, mapped to host port `8888` by the k3d cluster |
 
 ## Deploying a new version
@@ -25,9 +25,13 @@ pushing is the whole deployment procedure.
 
 ### 1. Update the image tag
 ```sh
-sed -i 's|wil42/playground:v1|wil42/playground:v2|' deployment.yaml
-# sed -i '' 's|wil42/playground:v1|wil42/playground:v2|' deployment.yaml (on macOS)
+sed -i 's|tajavon42-playground:v1|tajavon42-playground:v2|' deployment.yaml
+# sed -i '' 's|tajavon42-playground:v1|tajavon42-playground:v2|' deployment.yaml (on macOS)
 ```
+
+The image is built from `p3/app/` in the infrastructure repository and
+published for both amd64 and arm64, so it runs on Apple Silicon and on x86
+machines alike.
 
 ### 2. Commit and push
 ```sh
