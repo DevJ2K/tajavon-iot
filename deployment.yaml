@@ -19,6 +19,6 @@ spec:
       containers:
         - name: playground
           # The only line that changes between versions.
-          image: devj2k/tajavon42-playground:v2
+          image: devj2k/tajavon42-playground:v1
           ports:
             - containerPort: 8888
